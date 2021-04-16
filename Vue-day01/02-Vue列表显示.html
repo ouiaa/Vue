@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue列表显示</title>
+</head>
+
+<body>
+    <ul class="list">
+        <!-- 1.笨方法 -->
+        <!-- <li>{{member[0]}}</li>
+        <li>{{member[1]}}</li>
+        <li>{{member[2]}}</li>
+        <li>{{member[3]}}</li> -->
+        <!-- 2.使用v-for指令 -->
+        <li v-for='item in member'>{{item}}</li>
+    </ul>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        let lis = new Vue({
+            el: '.list',
+            data: {
+                member: ['孙悟空', '唐僧', '猪八戒', '沙僧']
+            }
+        })
+    </script>
+</body>
+
+</html>

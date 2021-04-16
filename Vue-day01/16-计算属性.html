@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>计算属性</title>
+</head>
+
+<body>
+  <div class="app">
+    <!-- 1)直接拼接:语法过于繁琐 -->
+    <p>{{firstName}} {{lastName}} </p>
+    <!-- 2)使用方法methods,缺点：语义化较差 -->
+    <!-- <p>{{getFullName()}}</p>
+    <p>{{getFullName()}}</p>
+    <p>{{getFullName()}}</p>
+    <p>{{getFullName()}}</p>
+    <p>{{getFullName()}}</p> -->
+
+    <!-- 3)使用计算属性computed,语义化较好 -->
+    <p>{{fullName}}</p>
+    <p>{{fullName}}</p>
+    <p>{{fullName}}</p>
+    <p>{{fullName}}</p>
+    <p>{{fullName}}</p>
+
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '.app',
+      data: {
+        message: 'hello',
+        firstName: 'Jone',
+        lastName: 'Popl'
+      },
+      // 1）计算属性的基本使用
+      computed: {
+        // 计算属性本质是属性，按属性命名方式命名成名词，不要按函数方式命名
+        // 用法和函数差不多
+        fullName: function () {
+          // 3）与methods点区别 会进行缓存
+          console.log('fullName');
+          return this.firstName + ' ' + this.lastName
+        },
+
+        // 2）完整写法：fullName属性值是一个对象，内有set和get两个方法
+        // 一般不使用set方法，因此为只读属性
+        // fullName: {
+        // 可以省略该方法，进一步简写到上面的写法
+        /* set:function(){
+
+        }, */
+
+        // 如果一定要使用set方法，往往需要一个参数传值
+        // set: function (newValue) {
+        //   let names = newValue.split(' ') //使用空格分割
+        //   this.firstName = names[0]
+        //   this.lastName = names[1]
+        // },
+        // get: function () {
+        //   return this.firstName + ' ' + this.lastName
+        // }
+        // }
+
+      },
+      methods: {
+        getFullName: function () {
+          // 3）与methods点区别
+          console.log('fullName');
+          return this.firstName + " " + this.lastName
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue生命周期</title>
+</head>
+
+<body>
+    <div class="app">{{message}}</div>
+    <script src="./js/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '.app',
+            data: {
+                message: 'Vue生命周期'
+            },
+            beforeCreate: function () {
+                console.group('beforeCreate 创建前状态===============》');
+                var state = {
+                    'el': this.$el,
+                    'data': this.$data,
+                    'message': this.message
+                }
+                console.log(state);
+            },
+            created: function () {
+                console.group('created 创建完毕状态===============》');
+                var state = {
+                    'el': this.$el,
+                    'data': this.$data,
+                    'message': this.message
+                }
+                console.log(state);
+            },
+            beforeMount: function () {
+                console.group('beforeMount 挂载前状态===============》');
+                var state = {
+                    'el': this.$el,
+                    'data': this.$data,
+                    'message': this.message
+                }
+                console.log(this.$el);
+                console.log(state);
+            },
+            mounted: function () {
+                console.group('mounted 挂载结束状态===============》');
+                var state = {
+                    'el': this.$el,
+                    'data': this.$data,
+                    'message': this.message
+                }
+                console.log(this.$el);
+                console.log(state);
+            },
+            beforeUpdate: function () {
+                console.group('beforeUpdate 更新前状态===============》');
+                var state = {
+                    'el': this.$el,
+                    'data': this.$data,
+                    'message': this.message
+                }
+                console.log(this.$el);
+                console.log(state);
+                console.log('beforeUpdate == ' + document.querySelector('.app').innerHTML);
+            },
+            updated: function () {
+                console.group('updated 更新完成状态===============》');
+                var state = {
+                    'el': this.$el,
+                    'data': this.$data,
+                    'message': this.message
+                }
+                console.log(this.$el);
+                console.log(state);
+                console.log('updated == ' + document.querySelector('.app').innerHTML);
+            },
+            beforeDestroy: function () {
+                console.group('beforeDestroy 销毁前状态===============》');
+                var state = {
+                    'el': this.$el,
+                    'data': this.$data,
+                    'message': this.message
+                }
+                console.log(this.$el);
+                console.log(state);
+            },
+            destroyed: function () {
+                console.group('destroyed 销毁完成状态===============》');
+                var state = {
+                    'el': this.$el,
+                    'data': this.$data,
+                    'message': this.message
+                }
+                console.log(this.$el);
+                console.log(state);
+            },
+            /* components: {
+                'my-components': child
+            } */
+        })
+    </script>
+</body>
+
+</html>

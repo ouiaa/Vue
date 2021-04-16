@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue初体验</title>
+</head>
+
+<body>
+    <!-- 使用两个花括号放入数据 -->
+    <div id="app">
+        {{message}}
+        <h1>{{name}}</h1>
+    </div>
+    <!-- 没有被挂载管理的元素 -->
+    <div>{{message}}</div>
+
+    <!-- 1.引入开发版本的Vue.js -->
+    <script src="./js/vue.js"></script>
+    <script>
+        // 编程范式：声明式编程
+        // 2.创建Vue实例对象
+        let h = new Vue({
+            // 3.使用模板语法把数据渲染到页面
+            el: '#app', //挂载需要管理的元素 el是element
+            data: { //定义数据
+                message: 'hello Vuejs',
+                name: 'vue'
+            }
+        })
+        // 以前js的做法： 编程范式：命令式编程
+        // 1.获取div元素
+        // 2.设置div元素里面的内容
+    </script>
+</body>
+
+</html>
