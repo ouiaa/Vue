@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-on</title>
+</head>
+
+<body>
+  <div class="app">
+    <h2>当前计数：{{counter}}</h2>
+    <!-- v-on事件指令，v-on:'click'点击事件  -->
+    <!-- 1)可以将事件内容直接写后面，但仅适合内容语句较短情况下 -->
+    <!--  <button v-on:click="counter++">+</button>
+    <button v-on:click="counter--">-</button> -->
+    <!-- 2)一般将事件内容放在方法内调用 -->
+    <button v-on:click="increment">+</button>
+    <!-- <button v-on:click="decrement">-</button> -->
+    <!-- 3)v-on:click语法糖@click -->
+    <button @click="decrement">-</button>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    let obj = {
+      counter: 0
+    }
+    let app = new Vue({
+      el: '.app',
+      data: obj,
+      methods: {
+        // 对象方法简写
+        increment() {
+          this.counter++
+        },
+        decrement() {
+          this.counter--
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

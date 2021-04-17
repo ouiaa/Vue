@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>案例：点击当前li变色</title>
+  <style>
+    .active {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <ul>
+      <li v-for="(value,index) in arr" :class="{active:currentIndex===index}" @click="liClick(index)">{{value}}</li>
+      <!-- <li :class="{active:0==currentIndex}"></li>
+      <li :class="{active:1==currentIndex}"></li>
+      <li :class="{active:2==currentIndex}"></li>
+      <li :class="{active:3==currentIndex}"></li> -->
+
+    </ul>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '.app',
+      data: {
+        arr: ['孙悟空', '唐僧', '猪八戒', '沙僧'],
+        currentIndex: 0
+      },
+      methods: {
+        liClick(i) {
+          this.currentIndex = i
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

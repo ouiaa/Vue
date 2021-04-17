@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-if/v-else-if/v-else</title>
+</head>
+
+<body>
+  <div class="app">
+    <!-- 1.v-if的使用 -->
+    <!-- 后面跟条件，可以是布尔型 true渲染元素，false不渲染-->
+    <!-- <p v-if=boolean></p> -->
+    <p v-if='true'>{{message}}</p>
+    <!-- 可以使用变量来控制是否渲染 -->
+    <p v-if=isShow>{{message}}</p>
+    <!-- 2.v-else的使用 -->
+    <p v-else>isShow为false</p>
+    <!-- 3.v-else-if的使用 -->
+    <p v-if='score>90'>优秀</p>
+    <p v-else-if='score>75'>良好</p>
+    <p v-else-if='score>60'>及格</p>
+    <p v-else>不及格</p>
+    <!-- 判断条件过多情况，建议使用计算属性 -->
+    <p>{{result}}</p>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '.app',
+      data: {
+        message: 'hello',
+        isShow: true,
+        score: 88
+      },
+      computed: {
+        result() {
+          let jieguo;
+          if (this.score > 90) {
+            jieguo = '优秀'
+          } else if (this.score > 75) {
+            // jieguo = '良好'
+            return '良'
+          } else if (this.score > 60) {
+            jieguo = '及格'
+          } else {
+            jieguo = '不及格'
+          }
+          return jieguo
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

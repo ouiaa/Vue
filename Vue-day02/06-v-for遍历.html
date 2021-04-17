@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-for遍历</title>
+</head>
+
+<body>
+  <div class="app">
+    <!-- 1.遍历数组 -->
+    <!-- 1)只遍历值 -->
+    <ul>
+      <li v-for="item in member">{{item}}</li>
+    </ul>
+    <!-- 2)遍历同时获取索引号index  -->
+    <ul>
+      <li v-for="(item,index) in member">{{index+1}}{{item}}</li>
+    </ul>
+    <!-- 2.遍历对象 -->
+    <!-- 1)只有一个参数，那么获取的是value -->
+    <ul>
+      <li v-for="item in star">{{item}}</li>
+    </ul>
+    <!-- 2)获取key和value 格式：(value,key)先value后key，注意顺序 -->
+    <ul>
+      <li v-for="(value,key) in star">{{key}}:{{value}}</li>
+    </ul>
+    <!-- 3)获取key和value和index索引号 格式：(value,key,index)，注意顺序 -->
+    <ul>
+      <li v-for="(value,key,index) in star">{{index}}{{key}}:{{value}}</li>
+    </ul>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '.app',
+      data: {
+        member: ['孙悟空', '唐僧', '猪八戒', '沙僧'],
+        star: {
+          name: '刘德华',
+          age: 18,
+          sex: '男'
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

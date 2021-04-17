@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>购物车案例</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app">
+    <table v-if="books.length">
+      <thead>
+        <tr>
+          <th></th>
+          <th>书籍名称</th>
+          <th>出版日期</th>
+          <th>价格</th>
+          <th>购买数量</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 遍历实现多个tr ,item这里遍历出来的是对象 -->
+        <tr v-for="(item,index) in books">
+          <!-- 不建议再嵌套遍历显示里面数据，原因：无法添加按钮等元素 -->
+          <!-- 通过对象.属性名显示获取数据 -->
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.date}}</td>
+          <!-- 1）给价格添加￥，及保留两位小数 -->
+          <!-- <td>{{'￥'+item.price.toFixed(2)}}</td> -->
+          <!-- 2）调用方法 -->
+          <!-- <td>{{getPrice(item.price)}}</td> -->
+          <!-- 3）添加过滤器 -->
+          <!-- <td>参数|过滤器</td> -->
+          <!-- 注意过滤器也在双大括号内 -->
+          <td>{{item.price| showPrice}}</td>
+          <td><button @click="decrement(index)" :disabled="!(item.num-1)">-</button> {{item.num}} <button
+              @click="increment(index)">+</button>
+          </td>
+          <td><button @click="removeHandler(index)">删除</button></td>
+        </tr>
+      </tbody>
+      <h3>总价：{{totalPrice|showPrice}}</h3>
+    </table>
+    <h2 v-else>购物车已空</h2>
+  </div>
+  <!-- 注意先引入vue.js再引入我们自己的js文件，因为我们的js文件中有使用vue.js -->
+  <script src="../../vue.js"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>
