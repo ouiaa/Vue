@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组件通信-父传子</title>
+</head>
+
+<body>
+  <div class="app">
+    <!-- 使用子组件cpn -->
+    <!-- 使用v-bind将父组件里的member变量里的数据赋值给子组件里的cmember变量 -->
+    <!-- 如果不使用v-bind，那么会将member识别为普通字符，也就无法父传子了 -->
+    <!-- <cpn v-bind:cmember="member" :cmessage="message"></cpn> -->
+    <!-- 未传入cmessage，启用默认值 -->
+    <!-- <cpn v-bind:cmember="member"></cpn> -->
+    <!-- 未传入cmember，启用默认值 -->
+    <cpn :c-message="message"></cpn>
+  </div>
+  <template id="son">
+    <!-- 子组件使用父组件数据 -->
+    <div>
+      <p>{{cmember}}</p>
+      <ul>
+        <li v-for="item in cmember">{{item}}</li>
+      </ul>
+      <p>{{cMessage}}</p>
+    </div>
+  </template>
+  <script src="../vue.js"></script>
+  <script>
+    // 父传子 props属性
+    let cpn = {
+      template: '#son',
+      // cmember当做变量
+      // props: ['cmember', 'cmessage']  //props属性，可以为数组
+      props: {
+        // props为对象
+        // 1.限制数据类型 变量名:数据类型
+        // cmember: Arrar,
+        // cmessage: String
+        // 2.还能设置默认值、必传值
+        cMessage: {
+          type: String,
+          default: 'aaa',  //未传入cmessage值时奏效
+          // required: true  //required属性为布尔值，为true时表示该属性cmessage必须传（类似函数里的参数必须）
+        },
+        cmember: {
+          type: Array,
+          // default: []//报错，类型是对象或数组时，默认值必须是一个函数
+          default() {
+            return []
+          }
+        }
+      }
+    }
+    // 以Vue实例对象 root组件作为父组件
+    let app = new Vue({
+      el: '.app',
+      data: {
+        // 父组件数据
+        message: 'hello',
+        member: ['孙悟空', '唐僧', '猪八戒', '沙僧']
+      },
+      components: {
+        cpn  //对象属性简写
+      }
+    })
+  </script>
+</body>
+
+</html>

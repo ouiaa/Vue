@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>具名插槽的基本使用</title>
+</head>
+
+<body>
+  <div class="app">
+    <!-- 旧语法，slot=name，挂载在非template标签上 -->
+    <!-- 2.使用时添加需要修改的插槽名字 -->
+    <cpn><span slot="left">返回</span></cpn>
+    <cpn><span slot="center">标题</span></cpn>
+    <!-- 新语法，挂载在template标签内 -->
+    <cpn>
+      <!-- 组件内添加template标签 -->
+      <template v-slot:right>
+        <a href="">右</a>
+      </template>
+      <!-- 语法糖 #name -->
+      <template #center>
+        <p>语法糖</p>
+      </template>
+    </cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <!-- 1.给插槽起名 -->
+      <slot name="left"><span>左边</span></slot>
+      <slot name="center"><span>中间</span></slot>
+      <slot name="right"><button>右边按钮</button></slot>
+    </div>
+  </template>
+
+  <script src="../vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '.app',
+      data: {
+        message: 'hello'
+      },
+      components: {
+        cpn: {
+          template: '#cpn'
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

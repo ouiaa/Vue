@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>父组件与子组件</title>
+</head>
+
+<body>
+  <div class="app">
+    <cpn2></cpn2>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    // 组件构造器cpnC1 子组件
+    const cpnC1 = Vue.extend({
+      template: `<div>
+      <h2>头部</h2>
+      <p>子</p>
+      <p>尾部</p>
+    </div>`
+    })
+    // 组件构造器cpnC2  父组件
+    const cpnC2 = Vue.extend({
+      template: `<div>
+      <h2>头部</h2>
+      <p>父</p>
+      <p>尾部</p>
+      <cpn1></cpn1> //要放在div内，不能放外面，否则报错
+    </div>`,
+      // 在组件构造器cpnC2注册组件，可以在template里使用该组件
+      components: {
+        cpn1: cpnC1
+      }
+    })
+    // 可以将Vue实例对象也看作是一个组件,root组件
+    let app = new Vue({
+      el: '.app',
+      data: {
+        message: 'hello'
+      },
+      components: {
+        // 注册父组件
+        cpn2: cpnC2
+      }
+    })
+  </script>
+</body>
+
+</html>

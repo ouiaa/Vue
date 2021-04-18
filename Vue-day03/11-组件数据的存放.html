@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组件数据的存放</title>
+</head>
+
+<body>
+  <div class="app">
+    <!-- 组件实例，没有共享一个data对象，每个实例有自己的data对象 -->
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+  </div>
+  <template id="count">
+    <div>
+      <h2>当前计数：{{counter}}</h2>
+      <button @click="decrement">-</button>
+      <button @click="increment">+</button>
+    </div>
+  </template>
+
+  <script src="../vue.js"></script>
+  <script>
+    Vue.component('cpn', {
+      template: '#count',
+      data() {
+        return {
+          counter: 0
+        }
+      },
+      methods: {
+        decrement() {
+          this.counter--
+        },
+        increment() {
+          this.counter++
+        }
+      }
+    })
+    let app = new Vue({
+      el: '.app',
+      data: {
+        message: 'hello'
+      }
+    })
+  </script>
+  <script>
+    // data为什么必须是函数
+    function fn() {
+      return {
+        name: 'auue'
+      }
+    }
+    let obj1 = fn()
+    let obj2 = fn()
+    let obj3 = fn()
+    // 多次调用函数，所得的对象并不是同一个对象，都会另开辟一块新的内存空间来存放结果
+    // 每次调用函数，都会返回一个新的对象，彼此不影响
+    console.log(obj1 === obj2); //false
+    console.log(obj1 === obj3); //false
+    // 由结果发现，对象们的内存地址并不相等
+
+
+    let obj = {
+      name: 'ccc'
+    }
+    function fn1() {
+      return obj  //obj有内存地址，本质上返回的是obj的内存地址
+    }
+    let obj4 = fn1()
+    let obj5 = fn1()
+    // 多次调用函数获得的对象是相同的，都和obj对象指向同一个内存地址
+    console.log(obj4 === obj5); //true
+    console.log(obj4 === obj); //true
+  </script>
+</body>
+
+</html>

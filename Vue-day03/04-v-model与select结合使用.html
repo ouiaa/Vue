@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-model与select结合使用</title>
+</head>
+
+<body>
+  <div class="app">
+    <!-- 1.单选 -->
+    <select v-model="fruit">
+      <option value="香蕉">香蕉</option>
+      <option value="苹果">苹果</option>
+      <option value="榴莲">榴莲</option>
+      <option value="葡萄">葡萄</option>
+    </select>
+    <h2>您的选择是：{{fruit}}</h2>
+    <!-- 2.多选 在select里添加multiple属性实现多选-->
+    <select name="aaa" v-model="fruits" multiple>
+      <option value="香蕉">香蕉</option>
+      <option value="苹果">苹果</option>
+      <option value="榴莲">榴莲</option>
+      <option value="葡萄">葡萄</option>
+    </select>
+    <h2>您的选择是：{{fruits}}</h2>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '.app',
+      data: {
+        fruit: '葡萄', //单选，设置一个值，可以设置默认值
+        fruits: [] //多选，设置一个数组
+      }
+    })
+  </script>
+</body>
+
+</html>

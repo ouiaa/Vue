@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>编译作用域</title>
+</head>
+
+<body>
+  <div class="app">
+    <!-- isShow使用的是Vue实例中的属性，而不是子组件的属性 -->
+    <!-- 整个组件的使用过程是在父组件中出现的，其作用域就是父组件，使用的属性也是父组件的属性 -->
+    <cpn v-show="isShow"></cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <slot name="left"><span>左边</span></slot>
+      <slot name="center"><span>中间</span></slot>
+      <slot name="right"><button>右边按钮</button></slot>
+      <!-- 在子组件内使用的是子组件内的属性 -->
+      <p v-show="isShow">pppp</p>
+    </div>
+  </template>
+  <script src="../vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '.app',
+      data: {
+        isShow: true
+      },
+      components: {
+        cpn: {
+          template: '#cpn',
+          data() {
+            return {
+              isShow: false
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
